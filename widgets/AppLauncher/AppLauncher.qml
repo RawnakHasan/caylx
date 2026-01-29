@@ -17,7 +17,7 @@ Scope {
         active: root.shouldShow
         
         PanelWindow {
-            WlrLayershell.namespace: 'AppLauncher'
+            WlrLayershell.namespace: 'ag-dash'
             implicitHeight: screen.height
             implicitWidth: screen.width
             color: 'transparent'
@@ -32,20 +32,20 @@ Scope {
             
             Rectangle {
                 anchors.top: parent.top
-                anchors.topMargin: Appearance.barHeight + Appearance.barMargin + 10
+                anchors.topMargin: Appearance.barHeight + Appearance.barMargin + Appearance.appLauncherGapFromBar
                 anchors.horizontalCenter: parent.horizontalCenter
-                implicitHeight: 224  // 256 - 32
-                implicitWidth: 512
+                implicitHeight: Appearance.appLauncherHeight
+                implicitWidth: Appearance.appLauncherWidth
                 color: Dynamic.color.surface_container_lowest
-                radius: 20  // Appearance.barHeight / 2 = 20
+                radius: Appearance.appLauncherRadius
                 border.color: Dynamic.color.surface_container_highest
                 border.width: 2
 
                 Rectangle {
-                    implicitHeight: parent.height - 16  // containerPadding
-                    implicitWidth: parent.width - 16
+                    implicitHeight: parent.height - Appearance.appLauncherPadding
+                    implicitWidth: parent.width - Appearance.appLauncherPadding
                     anchors.centerIn: parent
-                    radius: 15  // radius * 1.5 = 15
+                    radius: Appearance.appLauncherInnerRadius
                     color: Dynamic.color.surface_container
                     
                     ColumnLayout {
@@ -59,9 +59,9 @@ Scope {
                             id: search
                             anchors.top: parent.top
                             anchors.topMargin: 8
-                            implicitHeight: 38
-                            radius: 10  // defaultRadius
-                            implicitWidth: parent.width - 16
+                            implicitHeight: Appearance.appLauncherSearchHeight
+                            radius: Appearance.appLauncherSearchRadius
+                            implicitWidth: parent.width - Appearance.appLauncherPadding
                             anchors.horizontalCenter: parent.horizontalCenter
                             color: Dynamic.color.surface_container_highest
                             
@@ -117,17 +117,21 @@ Scope {
                             anchors.horizontalCenter: parent.horizontalCenter
                             anchors.bottom: appView.bottom
                             anchors.bottomMargin: 8
-                            implicitHeight: appView.height + 16
-                            radius: 10
+                            implicitHeight: appView.height + Appearance.appLauncherPadding
+                            radius: Appearance.appLauncherSearchRadius
                             color: Dynamic.color.surface_container_high
-                            implicitWidth: parent.width - 16
+                            implicitWidth: parent.width - Appearance.appLauncherPadding
 
                             ListView {
                                 focus: true
                                 id: appView
                                 width: parent.width - 16
-                                height: 128
-                                model: entry.notSearching ? DesktopEntries.applications : FuzzySort.go(entry.text, DesktopEntries.applications.values, { all: true, keys: ["name", "genericName"] }).map(a => a.obj)
+                                height: Appearance.appLauncherListHeight
+                                model: entry.notSearching ? DesktopEntries.applications : 
+                                        FuzzySort.go(entry.text, DesktopEntries.applications.values, {
+                                            all: true,
+                                            keys: ["name", "genericName"]
+                                        }).map(a => a.obj)
                                 y: 8
                                 spacing: 8
                                 anchors.horizontalCenter: parent.horizontalCenter
@@ -138,9 +142,9 @@ Scope {
                                     property bool isSelected: ListView.isCurrentItem
                                     anchors.horizontalCenter: parent.horizontalCenter
                                     width: parent.width
-                                    height: 32
+                                    height: Appearance.appLauncherItemHeight
                                     color: Dynamic.color.surface_container_highest
-                                    radius: 6.67  // radius / 1.5
+                                    radius: Appearance.appLauncherItemRadius
 
                                     states: [
                                         State {
@@ -214,6 +218,7 @@ Scope {
             }
         }
     }
+    
     IpcHandler {
         target: "AppLauncher"
 
