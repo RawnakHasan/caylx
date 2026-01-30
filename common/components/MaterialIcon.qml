@@ -5,7 +5,7 @@ import qs.common.colors
 
 Text {
     property string icon: "\ueb8b"
-    property int iconSize: 20
+    property int iconSize: Appearance.iconSize
 
     id: root
     anchors.centerIn: parent

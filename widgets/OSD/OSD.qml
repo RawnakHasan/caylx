@@ -3,7 +3,9 @@ import QtQuick.Layouts
 import Quickshell
 import Quickshell.Services.Pipewire
 import Quickshell.Widgets
+
 import qs.common.colors
+import qs.common
 
 Scope {
     id: root
@@ -60,9 +62,11 @@ Scope {
                         rightMargin: 20
                     }
 
-                    IconImage {
-                        implicitSize: 30
-                        source: Quickshell.iconPath("audio-volume-high-symbolic")
+                    Text {
+                        text: "\ue050"
+                        font.family: Appearance.iconFont
+                        color: Dynamic.color.primary
+                        font.pixelSize: 32 
                     }
 
                     ColumnLayout {

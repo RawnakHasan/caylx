@@ -8,6 +8,7 @@ import qs.common.colors
 
 FloatingWindow {
     id: root
+    property bool isOpen: false
 
     minimumSize {
         width: Screen.width * 3 / 4
@@ -15,16 +16,23 @@ FloatingWindow {
     }
 
     title: "ColorPaletteViewer"
-    visible: false
+    visible: isOpen
     color: Qt.rgba(Dynamic.color.background.r, Dynamic.color.background.g, Dynamic.color.background.b, 0.9)
 
-    Swatches { }
+    FocusScope {
+        anchors.fill: parent
+        focus: true
+        
+        Keys.onEscapePressed: root.isOpen = false
+        
+        Swatches { }
+    }
 
     IpcHandler {
-        target: "Color Palette Viewer"
+        target: "ColorPaletteViewer"
 
-        function open(): void { root.visible = true }
-        function close(): void { root.visible = false }
-        function toggle(): void { root.visible = !root.visible }
+        function open(): void { root.isOpen = true }
+        function close(): void { root.isOpen = false }
+        function toggle(): void { root.isOpen = !root.isOpen }
     }
 }

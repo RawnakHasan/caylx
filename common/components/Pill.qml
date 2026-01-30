@@ -14,7 +14,9 @@ Rectangle {
     property int pillTextOffset: 10
     
     readonly property bool useIcon: root.bubbleText === ""
-    
+
+    signal clicked()
+
     implicitHeight: Appearance.pillHeight
     radius: Appearance.pillRadius
     implicitWidth: Math.min(leftContent.width + text.implicitWidth + 17, root.maxWidth)
