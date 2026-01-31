@@ -7,6 +7,7 @@ import Quickshell.Io
 import Qt5Compat.GraphicalEffects 
 
 import qs.common
+import qs.common.components
 import qs.common.colors
 
 Scope {
@@ -66,8 +67,8 @@ Scope {
 		title: "WallpaperSelector"
 		id: mainWindow
 		color: Dynamic.color.background
-		width: 1000
-		height: 450
+		width: Screen.width / 1.5
+		height: Screen.height / 2.5
 		visible: false
 
 		ColumnLayout {
@@ -75,22 +76,54 @@ Scope {
 			anchors.margins: 12
 			spacing: 12
 
-			TextField {
-				id: searchField
+			Rectangle {
+				height: 45
+				width: parent.width
+				radius: 45
+				color: Dynamic.color.primary_container
 
-				Layout.fillWidth: true
-				Layout.preferredHeight: 45
-				placeholderText: "Search wallpapers..."
-				text: root.searchQuery
-				font.pixelSize: 16
-				focus: true
 
-				onTextChanged: {
-					root.searchQuery = text;
-					if (pathView.count > 0) {
-						pathView.currentIndex = 0;
+				RowLayout {
+					spacing: 12
+
+					Rectangle {
+						height: 45
+						width: 45 * 2
+						radius: 45
+						color: Dynamic.color.secondary
+
+						MaterialIcon {
+							icon: "search"
+							iconSize: 24
+							iconColor: Dynamic.color.on_secondary
+						}
 					}
+
+					TextField {
+						id: searchField
+
+						placeholderText: "Search wallpapers..."
+						text: root.searchQuery
+						font.pixelSize: 16
+						focus: true
+
+						onTextChanged: {
+							root.searchQuery = text;
+							if (pathView.count > 0) {
+								pathView.currentIndex = 0;
+							}
+						}
+						Keys.onEscapePressed: {
+							root.searchQuery = ""
+							mainWindow.visible = false
+						}
+
+						background: Rectangle {
+							color: Dynamic.color.primary_container
+							radius: 8
+						}
 				}
+			}
 
 				Keys.onRightPressed: pathView.focus = true
 				Keys.onLeftPressed: pathView.focus = true
@@ -148,7 +181,10 @@ Scope {
                             source: "file://" + delegateItem.modelData
                             fillMode: Image.PreserveAspectCrop
                             asynchronous: true
-                            smooth: true
+                            smooth: true 
+														cache: true
+														sourceSize.width: 400
+														sourceSize.height: 300
                             
                             layer.enabled: true
                             layer.effect: OpacityMask {
@@ -181,7 +217,7 @@ Scope {
                             onClicked: {
                                 pathView.currentIndex = delegateItem.index;
                                 Quickshell.execDetached({
-                                    command: ["sh", "-c", `~/.config/quickshell/caylx/scripts/colors/applyWallpaper.sh "${delegateItem.modelData}"`]
+                                    command: ["sh", "-c", `${Directories.scripts}/colors/applyWallpaper.sh "${delegateItem.modelData}"`]
                                 });
                                 mainWindow.visible = false
                             }
@@ -250,7 +286,7 @@ Scope {
 	}
 	
 	IpcHandler {
-		target: "wallpaperSelector"
+		target: "WallpaperSelector"
 
 		function open(): void { mainWindow.visible = true }
 		function close(): void { mainWindow.visible = false }

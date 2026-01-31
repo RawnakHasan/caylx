@@ -8,6 +8,7 @@ Text {
     property int iconSize: Appearance.iconSize
     property int iconHorizontalCenterOffset: -1
     property int iconVerticalCenterOffset: -1
+    property color iconColor: Dynamic.color.on_primary
 
     id: root
     anchors.centerIn: parent
@@ -24,6 +25,6 @@ Text {
     text: root.icon
     font.pixelSize: root.iconSize  // Set a reasonable size
     verticalAlignment: Text.AlignVCenter
-    color: Dynamic.color.on_primary
+    color: root.iconColor
     horizontalAlignment: Text.AlignHCenter
 }
