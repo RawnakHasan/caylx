@@ -7,24 +7,15 @@ Pill {
     PwObjectTracker {
         objects: [Pipewire.defaultAudioSink]
     }
-    
-    Connections {
-        function onVolumeChanged() {
-            root.shouldShowOsd = true;
-            hideTimer.restart();
-        }
-        target: Pipewire.defaultAudioSink ? Pipewire.defaultAudioSink.audio : null
-    }
-    
+
     Timer {
         id: hideTimer
         interval: 1000
         onTriggered: root.shouldShowOsd = false
     }
     
-    icon: Pipewire.defaultAudioSink.audio.muted ? "volume_off" : "volume_up"
-    pillText: Math.floor(Pipewire.defaultAudioSink.audio.volume * 100)
-    
+    icon: (Pipewire.defaultAudioSink && Pipewire.defaultAudioSink.audio) ? (Pipewire.defaultAudioSink.audio.muted ? "volume_off" : "volume_up") : "volume_off"
+    pillText: Pipewire.defaultAudioSink ? Math.floor(Pipewire.defaultAudioSink.audio.volume * 100) : 0    
     // Add MouseArea for click and scroll
     MouseArea {
         anchors.fill: parent

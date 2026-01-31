@@ -63,13 +63,13 @@ Scope {
 		}
 	}
 
-	FloatingWindow {
-		title: "WallpaperSelector"
-		id: mainWindow
-		color: Dynamic.color.background
-		width: Screen.width / 1.5
-		height: Screen.height / 2.5
-		visible: false
+FloatingWindow {
+    title: "WallpaperSelector"
+    id: mainWindow
+    color: Dynamic.color.background
+    implicitWidth: Screen.width / 1.5
+    implicitHeight: Screen.height / 2.5
+    visible: false
 
 		ColumnLayout {
 			anchors.fill: parent
@@ -78,7 +78,7 @@ Scope {
 
 			Rectangle {
 				height: 45
-				width: parent.width
+				implicitWidth: parent.width
 				radius: 45
 				color: Dynamic.color.primary_container
 

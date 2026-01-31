@@ -9,22 +9,13 @@ Pill {
         id: increaseProc
         command: ["brightnessctl", "set", "5%+"]
     }
-    
+
     // Process for decreasing brightness
     Process {
         id: decreaseProc
         command: ["brightnessctl", "set", "5%-"]
     }
-    
-    // Watch for brightness changes
-    Connections {
-        target: BrightnessService
-        function onCurrentBrightnessChanged() {
-            root.shouldShowOsd = true;
-            hideTimer.restart();
-        }
-    }
-    
+
     Timer {
         id: hideTimer
         interval: 1000

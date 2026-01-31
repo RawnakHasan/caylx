@@ -9,7 +9,7 @@ fi
 
 WALLPAPER="$1"
 CONFIG_FILE="$HOME/.config/caylx/config.json"
-SCRIPT_DIR="$HOME/.config/quickshell/caylx/scripts/"
+SCRIPT_DIR="$HOME/.config/quickshell/caylx/scripts"
 
 # Check if wallpaper file exists
 if [ ! -f "$WALLPAPER" ]; then
@@ -38,5 +38,4 @@ echo "Using scheme: $SCHEME"
 matugen -t "$SCHEME" image "$WALLPAPER"
 
 echo "Creating Terminal Colors"
-$SCRIPT_DIR/colors/generate-colors-material.sh
-$SCRIPT_DIR/colors/apply-term.sh
+$SCRIPT_DIR/colors/applyColors.sh

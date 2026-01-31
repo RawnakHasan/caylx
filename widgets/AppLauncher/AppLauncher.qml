@@ -176,28 +176,6 @@ Scope {
                                 Item {
                                     Layout.preferredWidth: 36
                                     Layout.preferredHeight: 36
-                                    
-                                    // Try Papirus first
-                                    Image {
-                                        id: papirusIcon
-                                        anchors.fill: parent
-                                        source: {
-                                            if (!modelData || !modelData.icon) return ""
-                                            var iconName = modelData.icon
-                                            // Extract just the icon name if it's a path
-                                            if (iconName.includes("/")) {
-                                                iconName = iconName.split("/").pop().replace(/\.(png|svg|xpm)$/, "")
-                                            }
-                                            return "file:///usr/share/icons/Papirus/48x48/apps/" + iconName + ".svg"
-                                        }
-                                        sourceSize.width: 36
-                                        sourceSize.height: 36
-                                        smooth: true
-                                        asynchronous: false
-                                        visible: status === Image.Ready
-                                    }
-                                    
-                                    // Fallback to system icon
                                     Image {
                                         id: systemIcon
                                         anchors.fill: parent
@@ -212,24 +190,6 @@ Scope {
                                         sourceSize.height: 36
                                         smooth: true
                                         asynchronous: true
-                                        visible: status === Image.Ready && papirusIcon.status !== Image.Ready
-                                    }
-                                    
-                                    // Final fallback to letter
-                                    Rectangle {
-                                        anchors.fill: parent
-                                        visible: papirusIcon.status !== Image.Ready && systemIcon.status !== Image.Ready
-                                        color: Dynamic.color.primary
-                                        radius: 8
-                                        
-                                        Text {
-                                            anchors.centerIn: parent
-                                            text: modelData && modelData.name ? modelData.name.charAt(0).toUpperCase() : "?"
-                                            font.family: Appearance.fontFamily
-                                            font.pixelSize: 20
-                                            font.bold: true
-                                            color: Dynamic.color.on_primary
-                                        }
                                     }
                                 }
                                 

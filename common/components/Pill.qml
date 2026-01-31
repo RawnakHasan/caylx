@@ -11,6 +11,7 @@ Rectangle {
     property bool pillTextBold: true
     property int textSize: 16
     property string bubbleText: ""
+    property real padding: 0
     property int iconSize: 20
     property int maxWidth: -1  // -1 means no limit
     property int pillTextOffset: 10
@@ -63,6 +64,7 @@ Rectangle {
     Text {
         id: text
         anchors.centerIn: parent
+        leftPadding: root.padding
         anchors.verticalCenterOffset: -1
         anchors.horizontalCenterOffset: root.pillTextOffset
         color: Dynamic.color.on_secondary_container
