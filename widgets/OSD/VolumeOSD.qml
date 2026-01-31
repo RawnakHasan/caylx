@@ -63,7 +63,7 @@ Scope {
                     }
 
                     Text {
-                        text: "\ue050"
+                        text: Pipewire.defaultAudioSink.audio.muted ? "volume_off" : "volume_up"
                         font.family: Appearance.iconFont
                         color: Dynamic.color.primary
                         font.pixelSize: 32 

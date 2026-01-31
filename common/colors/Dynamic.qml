@@ -6,11 +6,12 @@ import Quickshell.Io
 import qs.common
 
 Singleton {
-	property alias color: materialColorJsonAdapter.color
-	property alias palette: materialColorJsonAdapter.palette
+    property alias color: materialColorJsonAdapter.color
+    property alias palette: materialColorJsonAdapter.palette
 
     FileView {
         path: Directories.generatedMaterialThemePath
+        //path: "file:///home/quickshell-dev/.local/state/caylx/colors.json"
         watchChanges: true
         onFileChanged: reload()
 

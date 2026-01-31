@@ -8,7 +8,7 @@ Singleton {
   property string iconFont: "Material Symbols Rounded"
   property int barHeight: 40
   property real barMargin: 7.5
-  property real barWidth: Screen.width / 2
+  property real barWidth: Screen.width / 2.2
   property int universalSpacing: 10
   property int barWidgetHeight: 25
   property int pillHeight: barWidgetHeight

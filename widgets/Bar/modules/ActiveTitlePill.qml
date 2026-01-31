@@ -10,7 +10,7 @@ Pill {
     id: root
     readonly property Toplevel activeWindow: ToplevelManager.activeToplevel
 
-    maxWidth: 200
+    maxWidth: 150
     bubbleText: `${Hyprland.focusedWorkspace?.id} ` ?? ""
     pillText:  (activeWindow?.activated && activeWindow?.title) ? (activeWindow.appId.includes('.') ? activeWindow.title : activeWindow.appId) : "Desktop"
 }

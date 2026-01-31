@@ -20,7 +20,8 @@ Singleton {
     readonly property string videos: StandardPaths.standardLocations(StandardPaths.MoviesLocation)[0]
     readonly property list<string> appDirs: StandardPaths.standardLocations(StandardPaths.ApplicationsLocation)
 
-    property string generatedMaterialThemePath: FileUtils.trimFileProtocol(`${Directories.state}/${Directories.quickshellConfigName}/colors.json`)
+    property string shellConfigFile: FileUtils.trimFileProtocol(`${Directories.config}/${Directories.quickshellConfigName}/config.json`)
+    property string generatedMaterialThemePath: FileUtils.trimFileProtocol(`${Directories.home}/.local/state/caylx/colors.json`)
     property string wallpaperDirPath: FileUtils.trimFileProtocol(`${Directories.pictures}/Wallpapers`)
     property string scriptsPath: Quickshell.shellPath("scripts")
 }

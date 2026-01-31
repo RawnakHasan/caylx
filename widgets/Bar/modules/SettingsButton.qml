@@ -1,13 +1,22 @@
 import QtQuick
 import Quickshell
 import Quickshell.Io
+
+import qs.common
+import qs.common.colors
 import qs.common.components
 import qs.widgets.ColorPaletteViewer
 
-Pill {
+Rectangle {
     id: root
-    icon: "\ue871"
-    pillText: "Palette"
+    height: Appearance.barWidgetHeight
+    width: Appearance.barWidgetHeight
+    radius: Appearance.barWidgetHeight
+    color: Dynamic.color.primary
+
+    MaterialIcon {
+      icon: "settings"
+    }
 
     Process {
         id: ipcProcess
