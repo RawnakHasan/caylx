@@ -103,8 +103,9 @@ PanelWindow {
         anchors.verticalCenter: rightContainer.verticalCenter
         spacing: Appearance.universalSpacing
 
-        // MediaPill { }
-        BrightnessPill { }
+        MediaPill { }
+        // Gif { }
+        // BrightnessPill { }
         VolumePill { }
         Battery { }
         SettingsButton { }

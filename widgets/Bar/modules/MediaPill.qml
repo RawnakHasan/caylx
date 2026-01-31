@@ -1,20 +1,15 @@
 import Quickshell.Services.Mpris
 import QtQuick
 
+import qs.common.components
 import qs.common.colors
 
-Rectangle {
-  height: 25
-  width: 80
-  radius: 25 / 2
-  color: Dynamic.color.primary
+Pill {
+    height: 25
+    width: 100
+    radius: 25 / 2
 
-  Component.onCompleted: {
-    console.log(MprisPlayer.trackTitle)
-  }
-
-  Text {
-    text: MprisPlayer.trackTitle || "Unknown Title"
-    color: Dynamic.color.on_primary
-  }
+    icon: "music_note"
+    pillText: Mpris.players.values[0].trackTitle || "UnknownTitle"
+    maxWidth: 150
 }
